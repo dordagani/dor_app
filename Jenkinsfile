@@ -29,7 +29,7 @@ pipeline {
                   sh "docker stop ${containerID}"
                   sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
                   sh "docker rm ${containerID}"
-                  step([$class: 'MSTestPublisher', failOnError: false, testResultsFile: 'test_report.xml'])
+                //   step([$class: 'MSTestPublisher', failOnError: false, testResultsFile: 'test_report.xml'])
                 }
             }
             }   
