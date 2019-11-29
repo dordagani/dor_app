@@ -14,7 +14,8 @@ pipeline {
         }
         stage ('Deploy') {
             steps {
-                echo 'Deploying....'
+                containerID = sh(returnStdout: true, script: 'docker run -d dor_app:test-B${BUILD_NUMBER}').trim()
+                echo "Container ID is ==> ${containerID}"
                 }
             }   
         }   
