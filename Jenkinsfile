@@ -7,9 +7,9 @@ pipeline {
                  checkout scm
             }
         }
-        stage('Test') {
+        stage('Unit Test') {
             steps {
-                echo 'Testing12..'
+                sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.Integration ."
             }
         }
         stage('Deploy') {
