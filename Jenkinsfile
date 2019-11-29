@@ -32,8 +32,11 @@ pipeline {
                 //   step([$class: 'MSTestPublisher', failOnError: false, testResultsFile: 'test_report.xml'])
                 }
             }
-            }   
         }
+        stage ('After test') {
+            echo "After test..."
+        }   
+    }
     post {
         always {
             junit 'test_report.xml'
