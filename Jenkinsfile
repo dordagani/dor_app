@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-        stage ('After test') {
+        stage ('only if test passed') {
             steps {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
