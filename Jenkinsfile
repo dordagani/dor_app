@@ -45,15 +45,10 @@ pipeline {
                 }
             }   
         }
-        stage ( 'After After test' ) {
-            steps {
-                echo "After After test!!!"
-            }
-        }
     }
-    post {
+/*     post {
         always {
             junit 'test_report.xml'
         }
-    }  
+    } */  
 }
