@@ -33,6 +33,15 @@ pipeline {
                 }
             }
         }
+        stage ('After test') {
+            steps {
+                script {
+                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        echo "After test..."
+                    }
+                }
+            }   
+        }
     }
     post {
         always {
