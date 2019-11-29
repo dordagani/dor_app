@@ -15,7 +15,7 @@ pipeline {
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
             }
         }
-        stage ('Unit Test') {
+        stage ('Unit Test test') {
             steps {
                 echo "Do Unit Test....."
                 script {
