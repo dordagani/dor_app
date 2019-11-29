@@ -34,13 +34,14 @@ pipeline {
             }
         }
         stage ('After test') {
-            if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
             steps {
-                echo "After test..."
-            }
-            }
-        }   
-    }
+                script {
+                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        echo "After test..."
+                    }
+                }
+            }   
+        }
     post {
         always {
             junit 'test_report.xml'
