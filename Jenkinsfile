@@ -34,7 +34,9 @@ pipeline {
             }
         }
         stage ('After test') {
-            echo "After test..."
+            steps {
+                echo "After test..."
+            }
         }   
     }
     post {
