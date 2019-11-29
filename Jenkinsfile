@@ -27,7 +27,7 @@ pipeline {
                   containerID = sh(returnStdout: true, script: 'docker run -d dor_app:test-B${BUILD_NUMBER}').trim()
                   echo "Container ID is ==> ${containerID}"
                 //   sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
-                //   sh "docker stop ${containerID}"
+                  sh "docker stop ${containerID}"
                   sh "docker rm ${containerID}"
                   step([$class: 'MSTestPublisher', failOnError: false, testResultsFile: 'test_report.xml'])
                 }
