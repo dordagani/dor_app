@@ -12,8 +12,7 @@ pipeline {
                 sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
             }
         }
-        stage('Deploy') {
-            steps {
+        stage 'Deploy'
                 echo 'Deploying....'
                 containerID = sh (script: "docker run -d dor_app:test-B${BUILD_NUMBER}", returnStdout: true).trim()
                 echo "Container ID is ==> ${containerID}"
@@ -21,7 +20,5 @@ pipeline {
                 sh "docker stop ${containerID}"
                 sh "docker rm ${containerID}"
                 step([$class: 'MSTestPublisher', failOnError: false, testResultsFile: 'test_report.xml'])
-            }
-        }
     }
 }
