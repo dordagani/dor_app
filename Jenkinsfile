@@ -2,15 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Git') {
             steps {
-                 checkout scm
+                echo '> Checking out the Git version control ...'
+                checkout scm
             }
         }
-        stage('Unit Test') {
+        stage('Build') {
             steps {
                 script {
-                  def customImage = docker.build("dor_app:test-B${BUILD_NUMBER}")
+                    echo '> Building the test docker images ...' 
+                    def customImage = docker.build("dor_app:test-B${BUILD_NUMBER}")
                   }
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
             }
