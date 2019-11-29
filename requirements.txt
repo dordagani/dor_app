@@ -9,5 +9,5 @@ Flask==1.1.1
 #for tests
 #pytest==3.4.2
 pytest
-#pytest-cov==2.5.1
+pytest-cov==2.5.1
 #pytest-dependency==0.2
