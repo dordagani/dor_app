@@ -34,8 +34,10 @@ pipeline {
             }
         }
         stage ('After test') {
+            if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
             steps {
                 echo "After test..."
+            }
             }
         }   
     }
