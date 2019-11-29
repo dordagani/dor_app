@@ -1,0 +1,13 @@
+#black==19.10b0
+#flake8==3.7.9
+
+Flask==1.1.1
+#Flask-SQLAlchemy==2.4.1
+#gunicorn==19.9.0
+#psycopg2-binary==2.8.4
+
+#for tests
+#pytest==3.4.2
+pytest
+#pytest-cov==2.5.1
+#pytest-dependency==0.2
