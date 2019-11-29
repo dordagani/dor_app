@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                def customImage = docker.build("dor_app:test-B${BUILD_NUMBER}")
+                def customImage = docker.build("dor_app:test-B")
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
             }
         }
