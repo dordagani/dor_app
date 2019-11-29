@@ -16,7 +16,7 @@ pipeline {
         stage ('Deploy') {
             steps {
                 echo "Deploy....."
-                sh "docker run -d -name dor_app_test dor_app:test-B${BUILD_NUMBER}"
+                sh "docker run -d --name dor_app_test dor_app:test-B${BUILD_NUMBER}"
                 // containerID = sh(returnStdout: true, script: 'docker run -d dor_app:test-B${BUILD_NUMBER}').trim()
                 // echo "Container ID is ==> ${containerID}"
                 // sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
