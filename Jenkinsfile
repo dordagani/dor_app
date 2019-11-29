@@ -33,5 +33,10 @@ pipeline {
                 }
             }
             }   
-        }   
+        }
+    post {
+        always {
+            junit 'test_report.xml'
+        }
+    }  
     }
