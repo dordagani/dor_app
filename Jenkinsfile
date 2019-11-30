@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     echo '> Building the docker image ...' 
-                    customImage = docker.build("dordagani/flask_app:B${BUILD_NUMBER}")
+                    customImage = docker.build("dordagani/flask_app-image:B${BUILD_NUMBER}")
                   }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
                 echo '> Doing Unit Test ...'
                 script {
                   containerID = sh(returnStdout: true, script: 'docker run -d \
-                  dordagani/flask_app:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
+                  dordagani/flask_app-image:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
                                                                --cov-report xml:/data/coverage.xml \
                   ').trim()
                   echo "Container ID is ==> ${containerID}"
