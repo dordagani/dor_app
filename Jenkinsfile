@@ -12,10 +12,10 @@ pipeline {
             steps {
                 script {
                     echo '> Building the test docker images ...' 
-                    def customImage = docker.build("dordagani/dor_app:B${BUILD_NUMBER}")
+                    def customImage = docker.build("dordagani/flask_app:B${BUILD_NUMBER}")
 
                     docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
-                      customImage.push()
+                      customImage2.push()
                     }
                   }
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo "Do Unit Test....."
                 script {
-                  containerID = sh(returnStdout: true, script: 'docker run -d dor_app:test-B${BUILD_NUMBER}').trim()
+                  containerID = sh(returnStdout: true, script: 'docker run -d dordagani/flask_app:B${BUILD_NUMBER}').trim()
                   echo "Container ID is ==> ${containerID}"
                   sh "docker stop ${containerID}"
                   sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
