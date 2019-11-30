@@ -26,7 +26,10 @@ pipeline {
             steps {
                 echo '> Doing Unit Test ...'
                 script {
-                  containerID = sh(returnStdout: true, script: 'docker run -d dordagani/flask_app:B${BUILD_NUMBER}').trim()
+                  containerID = sh(returnStdout: true, script: 'docker run -d \
+                  dordagani/flask_app:B${BUILD_NUMBER}').trim()
+//                   # CMD py.test --junitxml=/data/test_report.xml \
+// #             --cov-report xml:/data/coverage.xml
                   echo "Container ID is ==> ${containerID}"
                   sh "docker stop ${containerID}"
                   sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
