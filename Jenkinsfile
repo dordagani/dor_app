@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo '> Building the test docker images ...' 
-                    def customImage = docker.build("dor_app:-B${BUILD_NUMBER}")
+                    def customImage = docker.build("dor_app:B${BUILD_NUMBER}")
 
                     customImage.push()
                   }
