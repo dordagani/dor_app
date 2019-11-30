@@ -40,9 +40,9 @@ pipeline {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                         echo '> Pushing to Docker Hub ...'
-                        // docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
-                        //   customImage.push()
-                        // }
+                        docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+                          customImage.push()
+                        }
                     }
                 }
             }   
