@@ -8,22 +8,22 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     echo '> Building the test docker images ...' 
                     def customImage = docker.build("dordagani/flask_app:B${BUILD_NUMBER}")
 
-                    docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
-                      customImage.push()
-                    }
+                    // docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+                    //   customImage.push()
+                    // }
                   }
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
             }
         }
-        stage ('Unit Test test') {
+        stage ('Unit Test') {
             steps {
-                echo "Do Unit Test....."
+                echo '> Doing Unit Test ...'
                 script {
                   containerID = sh(returnStdout: true, script: 'docker run -d dordagani/flask_app:B${BUILD_NUMBER}').trim()
                   echo "Container ID is ==> ${containerID}"
@@ -34,11 +34,14 @@ pipeline {
                 }
             }
         }
-        stage ('only if unit-test passed') {
+        stage ('Push to Docker Hun') {
             steps {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                        echo "After test..."
+                        echo '> Pushing to Docker Hub ...'
+                        docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+                          customImage.push()
+                        }
                     }
                 }
             }   
