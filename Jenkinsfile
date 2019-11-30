@@ -15,7 +15,7 @@ pipeline {
                     def customImage = docker.build("dordagani/flask_app:B${BUILD_NUMBER}")
 
                     docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
-                      customImage2.push()
+                      customImage.push()
                     }
                   }
                 // sh "docker build -t dor_app:test-B${BUILD_NUMBER} -f Dockerfile.unitTest ."
