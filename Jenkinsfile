@@ -31,7 +31,7 @@ pipeline {
 //                   # CMD py.test --junitxml=/data/test_report.xml \
 // #             --cov-report xml:/data/coverage.xml
                   echo "Container ID is ==> ${containerID}"
-                  sh "docker stop ${containerID}"
+                //   sh "docker stop ${containerID}"
                   sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
                   sh "docker rm ${containerID}"
                   step([$class: 'JUnitResultArchiver', testResults: 'test_report.xml'])
