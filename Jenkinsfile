@@ -9,7 +9,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build Docker Image') {
+        stage('Build Docker Image1') {
             steps {
                 script {
                     echo '> Building the docker image ...' 
