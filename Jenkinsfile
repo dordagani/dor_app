@@ -28,6 +28,7 @@ pipeline {
                 script {
                   containerID = sh(returnStdout: true, script: 'docker run -d \
                   dordagani/flask_app:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
+                                                               --cov-report xml:/data/coverage.xml \
                   ').trim()
 //                   # CMD py.test --junitxml=/data/test_report.xml \
 // #             --cov-report xml:/data/coverage.xml
