@@ -46,6 +46,18 @@ pipeline {
                 }
             }   
         }
+
+        stage ('Ansible Playbook') {
+            steps {
+                ansiColor('xterm') {
+                    ansiblePlaybook(
+                        playbook: 'ansible/redeploy_flask_container.yml',
+                        inventory: 'ansible/inventory.ini',
+                        // credentialsId: 'sample-ssh-key',
+                        colorized: true)
+                }
+            }
+        }
     }
 /*     post {
         always {
