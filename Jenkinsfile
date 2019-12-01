@@ -60,7 +60,6 @@ if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                 inventory: 'provision/inventory.ini',
                 credentialsId: 'test',
                 colorized: true)
-            )
         }
     }
 
