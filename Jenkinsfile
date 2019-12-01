@@ -33,12 +33,6 @@ stage ('Unit Test') {
 }
 
 if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-    
-    stage ('Approval') {
-        timeout(time:3, unit:'DAYS') {
-            input 'Do I have your approval for push & deployment?'
-        }
-    }
 
     stage ('Push') {
         node {
