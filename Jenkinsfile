@@ -47,16 +47,9 @@ pipeline {
             }   
         }
 
-        stage ('Ansible Playbook') {
+        stage ('Deploy') {
             steps {
-                // ansiblePlaybook colorized: true, 
-                // credentialsId: 'ssh-jenkins',
-                // limit: '172.31.29.105',
-                // installation: 'ansible',
-                // inventory: 'provision/inventory.ini', 
-                // playbook: 'provision/playbook.yml', 
-                // sudo: true,
-                // sudoUser: 'ansadmin'
+                echo '> Deploying the docker container ...'
                 ansiColor('xterm') {
                     ansiblePlaybook(
                         playbook: 'provision/playbook.yml',
