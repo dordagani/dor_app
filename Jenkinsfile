@@ -51,7 +51,7 @@ pipeline {
             steps {
                 ansiblePlaybook colorized: true, 
                 credentialsId: 'ssh-jenkins',
-                limit: "${HOST_PROVISION}",
+                limit: '172.31.29.105',
                 installation: 'ansible',
                 inventory: 'provision/inventory.ini', 
                 playbook: 'provision/playbook.yml', 
