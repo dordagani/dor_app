@@ -61,6 +61,7 @@ pipeline {
                     ansiblePlaybook(
                         playbook: 'provision/playbook.yml',
                         limit: '172.31.29.105',
+                        installation: 'ansible',
                         inventory: 'provision/inventory.ini',
                         // credentialsId: 'sample-ssh-key',
                         colorized: true)
