@@ -35,13 +35,18 @@ if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
     
     stage ('Approval') {
         timeout(time:3, unit:'DAYS') {
-            input 'Do I have your approval for deployment?'
+            input 'Do I have your approval for push & deployment?'
         }
     }
 
-    stage ('After approval') {
+    stage ('Push') {
         node {
-            echo 'after approval'
+            echo '> Pushing to Docker Hub ...'
+            docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+              customImage.push()
+              customImage.push('latest')
+            }
+            sh "docker rmi dordagani/flask_app-image:B${BUILD_NUMBER}"
         }
     }
 
