@@ -1,6 +1,8 @@
 #!groovy​
 
 def customImage
+def DOCKER_HUB_USER="dordagani"
+def APP_NAME="flask_app"
 
 stage ('Git') {
     node {
@@ -12,7 +14,7 @@ stage ('Git') {
 stage ('Build') {
     node {
         echo '> Building the docker image ...'
-        customImage = docker.build("dordagani/flask_app-image:B${BUILD_NUMBER}")
+        customImage = docker.build("${DOCKER_HUB_USER}/${APP_NAME}-image:B${BUILD_NUMBER}")
     }
 }
 
