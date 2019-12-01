@@ -49,21 +49,22 @@ pipeline {
 
         stage ('Ansible Playbook') {
             steps {
-                ansiblePlaybook colorized: true, 
-                credentialsId: 'ssh-jenkins',
-                limit: '172.31.29.105',
-                installation: 'ansible',
-                inventory: 'provision/inventory.ini', 
-                playbook: 'provision/playbook.yml', 
-                sudo: true,
-                sudoUser: 'ansadmin'
-                // ansiColor('xterm') {
-                //     ansiblePlaybook(
-                //         playbook: 'ansible/redeploy_flask_container.yml',
-                //         inventory: 'ansible/inventory.ini',
-                //         // credentialsId: 'sample-ssh-key',
-                //         colorized: true)
-                // }
+                // ansiblePlaybook colorized: true, 
+                // credentialsId: 'ssh-jenkins',
+                // limit: '172.31.29.105',
+                // installation: 'ansible',
+                // inventory: 'provision/inventory.ini', 
+                // playbook: 'provision/playbook.yml', 
+                // sudo: true,
+                // sudoUser: 'ansadmin'
+                ansiColor('xterm') {
+                    ansiblePlaybook(
+                        playbook: 'provision/playbook.yml',
+                        limit: '172.31.29.105',
+                        inventory: 'provision/inventory.ini',
+                        // credentialsId: 'sample-ssh-key',
+                        colorized: true)
+                }
             }
         }
     }
