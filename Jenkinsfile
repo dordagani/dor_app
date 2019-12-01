@@ -22,14 +22,13 @@ stage ('Unit Test') {
     node {
         echo '> Doing Unit Test ...'
         containerID = sh(returnStdout: true, script: 'docker run -d \
-        dordagani/flask_app-image:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
-                                                                      --cov-report xml:/data/coverage.xml \
+        dordagani/flask_app-image:B${BUILD_NUMBER} py.test --junitxml=/data/test_result.xml \
         ').trim()
         echo "Container ID is ==> ${containerID}"
         sh "docker stop ${containerID}"
-        sh "docker cp ${containerID}:/data/test_report.xml test_report.xml"
+        sh "docker cp ${containerID}:/data/test_result.xml test_result.xml"
         sh "docker rm ${containerID}"
-        step([$class: 'JUnitResultArchiver', testResults: 'test_report.xml'])
+        step([$class: 'JUnitResultArchiver', testResults: 'test_result.xml'])
     }
 }
 
