@@ -67,10 +67,6 @@ pipeline {
                 }
             }
         }
-        catch (err) {
-            throw err
-        }
-  }
     }
 /*     post {
         always {
