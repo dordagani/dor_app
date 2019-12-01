@@ -59,7 +59,7 @@ if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                     playbook: 'provision/playbook.yml',
                     installation: 'ansible',
                     inventory: 'provision/inventory.ini',
-                    credentialsId: 'docker_prod_cred',
+                    credentialsId: 'docker-prod-credentials',
                     colorized: true)
             }
         }
