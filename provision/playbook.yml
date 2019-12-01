@@ -21,4 +21,4 @@
     command: docker pull dordagani/flask_app-image:latest
 
   - name: creating container using flask_app-image
-    command: docker run -d --name flask_app -p 5000:5000 dordagani/flask_app-image
+    command: docker run -d --name flask_app -p 80:5000 dordagani/flask_app-image
