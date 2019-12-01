@@ -33,13 +33,6 @@ pipeline {
                 }
             }
         }
-        stage ('Approval') {
-            script {
-                timeout(time:2, unit:'DAYS') {
-                  input 'Do I have your approval for push & deployment?'
-                }
-            }
-        }
         stage ('Push to Docker Hub') {
             steps {
                 script {
