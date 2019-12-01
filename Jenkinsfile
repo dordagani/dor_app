@@ -33,6 +33,11 @@ pipeline {
                 }
             }
         }
+        stage ('Approval') {
+            timeout(time:2, unit:'DAYS') {
+                input 'Do I have your approval for push & deployment?'
+            }
+        }
         stage ('Push to Docker Hub') {
             steps {
                 script {
@@ -41,6 +46,7 @@ pipeline {
                         docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
                           customImage.push()
                           customImage.push('latest')
+                          // Delete the container image!!!!
                         }
                     }
                 }
@@ -61,6 +67,9 @@ pipeline {
                 }
             }
         }
+        catch (err) {
+          throw err
+  }
     }
 /*     post {
         always {
