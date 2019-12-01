@@ -33,32 +33,34 @@ pipeline {
                 }
             }
         }
-        stage ('Push') {
-            steps {
-                script {
-                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                        echo '> Pushing to Docker Hub ...'
-                        docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
-                          customImage.push()
-                          customImage.push('latest')
-                          sh "docker rmi dordagani/flask_app-image:B${BUILD_NUMBER}"
+        if (currentBuild.result == null) {
+            stage ('Push') {
+                steps {
+                    script {
+                        if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                            echo '> Pushing to Docker Hub ...'
+                            docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
+                              customImage.push()
+                              customImage.push('latest')
+                              sh "docker rmi dordagani/flask_app-image:B${BUILD_NUMBER}"
+                            }
                         }
                     }
-                }
-            }   
-        }
+                }   
+            }
 
-        stage ('Deploy') {
-            steps {
-                echo '> Deploying the docker container ...'
-                ansiColor('xterm') {
-                    ansiblePlaybook(
-                        playbook: 'provision/playbook.yml',
-                        limit: '172.31.29.105',
-                        installation: 'ansible',
-                        inventory: 'provision/inventory.ini',
-                        credentialsId: 'test',
-                        colorized: true)
+            stage ('Deploy') {
+                steps {
+                    echo '> Deploying the docker container ...'
+                    ansiColor('xterm') {
+                        ansiblePlaybook(
+                            playbook: 'provision/playbook.yml',
+                            limit: '172.31.29.105',
+                            installation: 'ansible',
+                            inventory: 'provision/inventory.ini',
+                            credentialsId: 'test',
+                            colorized: true)
+                    }
                 }
             }
         }
