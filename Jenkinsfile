@@ -67,8 +67,8 @@ if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
 
 }
 
-def call(String buildResult) {
-  if ( buildResult == "SUCCESS" ) {
+
+  if ( currentBuild.result == "SUCCESS" ) {
     echo "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
   }
 //   else if( buildResult == "FAILURE" ) { 
