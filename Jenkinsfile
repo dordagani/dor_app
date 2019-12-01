@@ -49,12 +49,20 @@ pipeline {
 
         stage ('Ansible Playbook') {
             steps {
-                ansiColor('xterm') {
-                    ansiblePlaybook(
-                        playbook: 'ansible/redeploy_flask_container.yml',
-                        inventory: 'ansible/inventory.ini',
-                        // credentialsId: 'sample-ssh-key',
-                        colorized: true)
+                ansiblePlaybook colorized: true, 
+                credentialsId: 'ssh-jenkins',
+                limit: "${HOST_PROVISION}",
+                installation: 'ansible',
+                inventory: 'provision/inventory.ini', 
+                playbook: 'provision/playbook.yml', 
+                sudo: true,
+                sudoUser: 'ansadmin'
+                // ansiColor('xterm') {
+                //     ansiblePlaybook(
+                //         playbook: 'ansible/redeploy_flask_container.yml',
+                //         inventory: 'ansible/inventory.ini',
+                //         // credentialsId: 'sample-ssh-key',
+                //         colorized: true)
                 }
             }
         }
