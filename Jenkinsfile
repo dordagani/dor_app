@@ -30,3 +30,11 @@ stage ('Unit Test') {
         step([$class: 'JUnitResultArchiver', testResults: 'test_report.xml'])
     }
 }
+
+if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+    stage ('test123') {
+        node {
+            echo 'test123'
+        }
+    }
+}
