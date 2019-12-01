@@ -63,7 +63,7 @@ pipeline {
                 //         inventory: 'ansible/inventory.ini',
                 //         // credentialsId: 'sample-ssh-key',
                 //         colorized: true)
-                }
+                // }
             }
         }
     }
