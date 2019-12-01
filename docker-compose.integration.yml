@@ -1,8 +1,0 @@
-version: '3.1'
- 
-services:
-  integration:
-    image: "dor_app:test-B${BUILD_NUMBER}"
-    build:
-      context: .
-      dockerfile: Dockerfile.Integration
