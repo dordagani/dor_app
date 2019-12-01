@@ -32,9 +32,17 @@ stage ('Unit Test') {
 }
 
 if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-    stage ('test123') {
-        node {
-            echo 'test123'
+    
+    stage ('Approval') {
+        timeout(time:3, unit:'DAYS') {
+            input 'Do I have your approval for deployment?'
         }
     }
+
+    stage ('After approval') {
+        node {
+            echo 'after approval'
+        }
+    }
+
 }
