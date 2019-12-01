@@ -9,7 +9,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
                 script {
                     echo '> Building the docker image ...' 
@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-        stage ('Push to Docker Hub') {
+        stage ('Push') {
             steps {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
@@ -41,7 +41,7 @@ pipeline {
                         docker.withRegistry('https://registry-1.docker.io/v2/', 'docker-hub-credentials') {
                           customImage.push()
                           customImage.push('latest')
-                          // Delete the container image!!!!
+                          sh "docker rmi dordagani/flask_app-image:B${BUILD_NUMBER}"
                         }
                     }
                 }
