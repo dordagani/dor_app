@@ -22,8 +22,8 @@ stage ('Unit Test') {
     node {
         echo '> Doing Unit Test ...'
         containerID = sh(returnStdout: true, script: 'docker run -d \
-        dordagani/flask_app-image:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
-                                                           --cov-report xml:/data/coverage.xml \
+        ${DOCKER_HUB_USER}/${APP_NAME}-image:B${BUILD_NUMBER} py.test --junitxml=/data/test_report.xml \
+                                                                      --cov-report xml:/data/coverage.xml \
         ').trim()
         echo "Container ID is ==> ${containerID}"
         sh "docker stop ${containerID}"
@@ -48,7 +48,7 @@ if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
               customImage.push()
               customImage.push('latest')
             }
-            sh "docker rmi dordagani/flask_app-image:B${BUILD_NUMBER}"
+            sh "docker rmi ${DOCKER_HUB_USER}/${APP_NAME}-image:B${BUILD_NUMBER}"
         }
     }
 
